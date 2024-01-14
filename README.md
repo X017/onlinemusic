@@ -6,7 +6,8 @@ if you want to run this web app try this instructions
 <ul> <li> <code> pip install bottle</code></li>
     <li> <code> pip install pygame </code> </li>
 </ul>
-make <code> view </code> folder move all .tpl file there.
+make <code> view </code> and <code> music </code> folder move all .tpl file there.
+move your music there.
 
 <p> then run </p>
 <code> python3 main.py </code>
