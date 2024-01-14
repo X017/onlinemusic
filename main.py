@@ -11,11 +11,20 @@ cur = db.cursor()
 
 @route('/play')
 def get_music():
-    return template('play.tpl')
-
+    return '''
+     <form action="/play" method="post">
+            Music: <input name="music_name" type="text" />
+            <input value="Login" type="submit" />
+        </form>
+        <iframe src="http://localhost:8000/list"  height="500px" width="600px"></iframe>
+'''
+    
 @route('/play',method='POST')
 def play_music():
-    pass
+    os.chdir('/home/parsa/projects/test/music')
+    wp_music = request.forms.get('music_name')
+    mixer.music.load(wp_music)
+    mixer.music.play()
 
 @route('/list')
 def music_list():
@@ -28,7 +37,13 @@ def list_update():
         if '.mp3' in m:
             cur.execute(f'INSERT INTO music(name) VALUES ("{m}")')
     db.commit()
+@route('/volume')
+def play_volume():
+    volume = mixer.music.get_volume()
+    return f"mixer volume is {volume}"
+    
 debug(True)
+reloader(True)
 run(host='localhost',port=8000)
 
 
